@@ -7,5 +7,11 @@ class Login{
 		
 	}
 	
+	public function inputHtml(){
+		
+		echo "Hej från InputHtml!";
+		
+	}
+	
 	
 }
