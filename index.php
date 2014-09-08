@@ -10,6 +10,6 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-
+Nu funkar github och de läggs upp på http://127.0.0.1/1DV408_login/
     </body>
 </html>
