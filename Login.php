@@ -8,7 +8,6 @@ class Login{
 	}
 	
 	public function inputHtml(){
-		
 		?>
 			<!DOCTYPE HTML>
 			<html>
@@ -31,7 +30,12 @@ class Login{
 							<input type="checkbox" id="cookie" name="cookie" value="yes"/>
 							<input type="submit" value="Logga in"/>
 						</fieldset>
-					</form>
+					</form><?php
+					echo '<p>' . ucfirst(utf8_encode(strftime('%A'))) 
+					. ', den ' . date('j ') . 
+					ucfirst(strftime('%B')) . ' år ' . date('Y') . 
+					'. Klockan är ['.date('H:i:s').']</p>'
+					?>
 				</body>
 			</html>	
 		<?php	
