@@ -1,5 +1,7 @@
 <?php
 class loginView{
+	private $username;
+	private $password;
 	
 	public function __construct(){
 		
@@ -41,4 +43,23 @@ class loginView{
 			
 		return $ret . $clock;
 	}
+	public function input(){
+		if(isset($_POST['username'])){
+			$this->username = $_POST['username'];
+		}
+		if(isset($_POST['password'])){
+			$this->password = $_POST['password'];
+		}
+	}
+	public function getUsername(){
+		return $this->username;
+	}
+	public function getPassword(){
+		return $this->password;
+	}
 }
+
+
+
+
+
