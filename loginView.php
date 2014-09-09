@@ -9,7 +9,7 @@ class loginView{
 		
 	}
 	
-	public function inputHtml(){
+	public function inputHtml($status){
 		setlocale(LC_ALL, 'swedish');
 		$clock = '<p>' . ucfirst(utf8_encode(strftime('%A'))) 
 					. ', den ' . date('j ') . 
@@ -26,6 +26,7 @@ class loginView{
 				<body>
 					<h1>Lab2 1DV408_Login EJ222PJ</h1>
 					<h2>Ej Inloggad</h2>
+					<p>$status</p>
 					<form action='?login' method='post' enctype='multipart/form-data'>
 						<fieldset>
 							<legend>Login - Skriv in användarnamn och lösenord</legend>

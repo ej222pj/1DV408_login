@@ -4,9 +4,9 @@ require_once("/loginModel.php");
 require_once("/loginview.php");
 
 class loginModel{
-	private $username = 'Admin';
-	private $password = 'password';
-	private $correctLogin = false;
+	private $un = 'Admin';
+	private $pw = 'password';
+	private $correctLogin;
 	
 	public function __construct(){
 		
@@ -17,8 +17,13 @@ class loginModel{
 		return $this->view->inputHtml();
 	}
 	public function checkLogin($username, $password){
-		$this->correctLogin = ($this->username == $this->$password);
 		
-		return $this->correctLogin;
+		if($this->un = $username || $this->pw = $password){
+			return $this->correctLogin = TRUE;
+		}else{
+			return $this->correctLogin = FALSE;
+		}
+		
+		
 	}
 }
