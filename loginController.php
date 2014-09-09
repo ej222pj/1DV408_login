@@ -13,8 +13,13 @@ class loginController{
 		$this->view = new loginView();
 		}
 	public function doLogin(){
-		
-		
-		return $this->view->inputHtml();
+		$control = $this->view->inputHtml();
+		if(isset($_POST['submit'])){
+			$this->view->input();
+			$username = $this->view->getUsername();
+			$password = $this->view->getPassword();
+			$this->model->checkLogin($username, $password);
+		}
+		return $control;
 	}
 }
