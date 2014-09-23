@@ -5,7 +5,7 @@ require_once('/loginController.php');
 session_start();
 
 $loginC = new loginController();
-$htmlBody = $loginC->doLogin();
+$htmlBody = $loginC->loginPage();
 
 $view = new HTMLView();
 $view->echoHTML($htmlBody);
