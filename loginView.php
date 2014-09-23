@@ -52,7 +52,7 @@ class loginView{
 			header('Location: ' . $_SERVER['PHP_SELF']);
    		}
 	    elseif($this->checkCookie() && $this->cookieLogin() == false){
-		        $this->status->save("Felaktig inFormation i kakan!");
+		        $this->status->save("Felaktig information i kakan!");
 		        header('Location: ' . $_SERVER['PHP_SELF']);
 	    }
 	    else{
@@ -84,7 +84,25 @@ class loginView{
 		setcookie($this->unFromForm, "" , time() -3600);
 		return $ret . $clock;
 	}
-
+	
+  	//Logga in med kakor
+	public function cookieLogin() {//Kolla om kakan finns och inte har gått ut
+	    if($this->checkCookie() && $this->expiredCookie() == false){
+			$cookie = $this->getCookie();
+	      //Loggar om allt username och password stämmer
+	      if($cookie['user']->username === $this->model->getUsername() 
+	      	&& 
+	      	$this->model->loginModel(
+		      	$this->getClientInfo(), 
+		      	$this->model->getPassword(), 
+				$cookie['pass']->password)
+			){
+	        return true;
+	      }
+	    }
+		$this->killCookie();
+	    return false;
+	  }
 
 	public function clickLogin(){
 		return isset($_POST["loggaIn"]);
@@ -113,7 +131,7 @@ class loginView{
 				return true;
 			}//Klarade med komihåg
     		elseif($this->model->getUsername() === $un && $this->model->getPassword() === $pw && $this->remeberChecked()) {
-			    $this->status->save("Inloggning lyckades och vi kommer ihåg dig nästa gånh!");
+			    $this->status->save("Inloggning lyckades och vi kommer ihåg dig nästa gång!");
 			    return true;
     		}//Saknar username
     		elseif(empty($un) && empty($pw) || $pw && empty($un)) {
@@ -131,7 +149,7 @@ class loginView{
 	}
 	
 	public function getClientInfo(){
-		return $_SERVER["REMOTE_ADDR"] . $_SERVER["HTTP_USER_AGENT"];
+		return $_SERVER["HTTP_USER_AGENT"];
 	}
 
 	//Sätter kakor
