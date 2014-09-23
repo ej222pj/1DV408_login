@@ -9,7 +9,7 @@ class loginView{
 	private $rememberPw = "loginView::Password";
 	private $unFromForm = "loginView::Form::Username";
 		
-	public function __construct(\loginModel $model){
+	public function __construct(loginModel $model){
 		$this->model = $model;
 		$this->status = new cookieStorage();
 	}
@@ -64,6 +64,11 @@ class loginView{
 	
 	public function logoutPrint(){
 		$user = $this->model->getUsername();
+		//Klockan
+		$clock = '<p>' . ucfirst(utf8_encode(strftime('%A'))) 
+			. ', den ' . date('j ') . 
+			ucfirst(strftime('%B')) . ' år ' . date('Y') . 
+			'. Klockan är ['.date('H:i:s').']</p>';
 		
 		$ret = "
 			<h2>$user är inloggad</h2>
@@ -77,8 +82,9 @@ class loginView{
 			$ret .= $this->status->load();
 		}
 		setcookie($this->unFromForm, "" , time() -3600);
-		return $ret;
+		return $ret . $clock;
 	}
+
 
 	public function clickLogin(){
 		return isset($_POST["loggaIn"]);
@@ -105,7 +111,22 @@ class loginView{
 			if($this->model->getUsername() === $un && $this->model->getPassword() === $pw && $this->remeberChecked() == false){
 				$this->status->save("Inloggning lyckades!");
 				return true;
-			}
+			}//Klarade med komihåg
+    		elseif($this->model->getUsername() === $un && $this->model->getPassword() === $pw && $this->remeberChecked()) {
+			    $this->status->save("Inloggning lyckades och vi kommer ihåg dig nästa gånh!");
+			    return true;
+    		}//Saknar username
+    		elseif(empty($un) && empty($pw) || $pw && empty($un)) {
+      			$this->status->save("Användarnamn saknas!");
+    		}//Saknar Pass
+    		elseif($un && empty($pw)) {
+      			$this->status->save("Lösenord saknas!");
+    		}//Fel lösen eller pass
+    		elseif($un === $this->model->getUsername() && $pw !== $this->model->getPassword()
+      			|| $un !== $this->model->getUsername() && $pw !== $this->model->getPassword()
+      			|| $pw === $this->model->getPassword() && $un !== $this->model->getUsername()){
+      			$this->status->save("Felaktigt användarnamn och/eller lösenord");
+    		}
 		return false;
 	}
 	
