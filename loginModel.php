@@ -25,7 +25,7 @@ class loginModel{
 			$_SESSION[$this->UnSession] = $this->un;
 			$_SESSION[$this->PwSession] = $this->pw;
 			$_SESSION[$this->userId] = base64_encode($userId);
-
+			
 			return true;
 		}
 		
@@ -40,7 +40,7 @@ class loginModel{
 	public function loggedIn($clientInfo){
 		if(isset($_SESSION[$this->IdSession]) && $_SESSION[$this->IdSession] === $this->Id
 		&& $_SESSION[$this->UnSession] === $this->un && $_SESSION[$this->PwSession] === $this->pw
-		&& $_SESSION[$this->userId] = base64_encode($clientInfo)){
+		&& $_SESSION[$this->userId] === base64_encode($clientInfo)){
 			return true;
 		}
 		return false;

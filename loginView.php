@@ -34,13 +34,13 @@ class loginView{
 				<Form action='.' method='post' enctype='multipart/Form-data'>
 					<fieldset>
 						<legend>Login - Skriv in användarnamn och lösenord</legend>
-						<lable for='username'>Användarnamn:</lable>
-						<input type='text' name='username' value='$username'/>
-						<lable for='password'>Lösenord:</lable>
-						<input type='password' name='password' value=''/>
-						<lable for='cookie'>Håll mig inloggad:</lable>
-						<input type='checkbox' id='remember' name='remember'/>
-						<input type='submit' name='loggaIn' value='Logga in'/>
+							<label>Användarnamn:</label>
+							<input type='text' name='username' value='$username'/>
+							<label>Lösenord:</label>
+							<input type='password' name='password' value=''/>
+							<label>Håll mig inloggad:</label>
+							<input type='checkbox' id='remember' name='remember'/>
+							<input type='submit' name='loggaIn' value='Logga in'/>
 					</fieldset>
 				</Form>
 				";
